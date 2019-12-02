@@ -6,6 +6,8 @@
 
 business rules (software-architecturally-speaking) for a distributed, democratised, open-source infrastructure supporting non-traditional practical work experiments from remote, virtual and simulated laboratories
 
+# THIS IS VERY DRAFT - WORK IN PROGRESS
+
 ## Introduction
 ```br``` is the core "business rules" of an open-source infrastructure project that is to non-traditional practical work (remote, virtual, simulated laboratories) what Uber is to taxis (without the human rights issues). Reducing the minimum buy-in to make a world class remote laboratory  down to a single experiment hosted on a single board computer, on any old internet-surfing network you've got access to. Federate with others to offer your users frictionless, faultless, emotionally engaging experiences. With it, if you can afford a raspberry pi with a camera, and you have a network connection, then you can join a give your users a world class experience, with access to a wealth of experiments (shared from others within the same ecosystem) - no need to wait for a big government cheque to get started building your lab.
 
