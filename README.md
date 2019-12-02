@@ -69,12 +69,25 @@ Nano-payments require real-time latency with the option of pre-purchasing, and a
 
 ## Boundaries
 
+We can explore the boundaries by separating concerns according to who knows about them, and what causes them to change.
+
+![alt text][agents]
+
 ### data path
 
 
 It is anticipated that the following constituencies will exist:
 0. experiment constructors (hardware and software - remember to minimise firmware says Uncle Bob!)
 1. experiment constructors
+
+
+### interfaces
+
+selector of selectors (e.g. need video selector, data selector, evaluation selector etc, and within that need selectors for each subtype...
+
+
+so need to select a video selector, then if webrtc is on the list, which webrtc. And if webrtc AND jsmpeg, then a selector to compare between those ...
+and similarly for any other services we might have on offer ...
 
 
 ### payments
@@ -92,7 +105,7 @@ or accept fast results for known hashes, plus "slower" lookup through other entr
 
 
 [logo]: ./img/logo.png "ua logo, person in square"
-[uses]: ./img/uses.png "browser and native uses are envisages"
+[agents]: ./img/agents.png "agents with separated concerns"
 [status]: https://img.shields.io/badge/concept-development-red "Concept development" 
 
 
