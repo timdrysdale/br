@@ -104,12 +104,26 @@ hash, catalogue search (elastic search, not on hash)
 (n.b. can save results of previous searches as list of hashes to look for next time ...so do we include version and network permissions etc?)
 or accept fast results for known hashes, plus "slower" lookup through other entries... which won't be that slow.
 
+## Workers
+
+Workers will be plentiful, and it is easier to configure them dynamically. Hence, we need factories. The factory supplies the addresses for the communications, and any configuration data that is needed (by initialising the state store via args to the goroutine that is the worker). By separating the state machine from the communications, the state machine can be tested more easily, and also the communications scheme can be changed more readily. The automatic finding of dynamic service names is assumed to take place elsewhere. If long-lived connections need to change addresses, then this feature needs to be built in to the worker in whichever way is most appropriate (probably by having an additional channel that connects to the comms block, which changes address whenever it gets a new address over that channel).
+
+![alt text][worker]
+
+### Factories
+
+Factories with worker config stores are relatively easy to re-configure. When multiple stores are in play, worker groups should be submitted to a single store and registered with the worker finder. If redundancy is needed, then it should be facaded behind the worker config store, so that there is no need for the finder store to make any representations about the state-consistency of duplicate store locations, because as far as it knows there is only one copy anyway. For redundancy, more than one copy might be useful.
+
+It is expected that there will be multipled factories running under the control of the factory manager, within the computational power of the processses/threads assigned to the factory manager. There is a chain of responsibility for ensuring that one, and only one, instance of a worker is running at all times that one is desired. This requires worker status information to be returned back through the chain, aggregated into factory and factory manager statuses. It is expected that issues with managers or factories that they cannot themselves resolve, will result in workers being killed and restarted, although being able to keep alive existing workers and hand control to a new factory or manager seems a bit smoother, albeit risky in terms of translating whatever corrupted system. On the other hand, workers that store their state external to themselves are likely to be able to be restarted and pick up where they left off (subject to a state sanity check on restart) - and assuming the worker state store is persisted, and available to the new worker - which is not guaranteed if a server change is needed, for example ...
+
+![alt text][factory]
 
 
-[logo]: ./img/logo.png "ua logo, person in square"
 [agents]: ./img/agents.png "agents with separated concerns"
+[factory]: ./img/factory.png "factory with worker finder"
+[logo]: ./img/logo.png "ua logo, person in square"
 [status]: https://img.shields.io/badge/concept-development-red "Concept development" 
-
+[worker]: ./img/worker.png "worker with channels and redux state machine"
 
 
 
